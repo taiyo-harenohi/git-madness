@@ -92,12 +92,4 @@ public class Movement : MonoBehaviour
             extraJumps = extraJumpsValue;
         }
     }
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "attack")
-        {
-            SceneManager.LoadScene("gameover");
-        }
-    }
 }
