@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     // Key codes for individual players.
-    [SerializeField] KeyCode left;
-    [SerializeField] KeyCode right;
-    [SerializeField] KeyCode jump;
+    [SerializeField] KeyCode leftKey;
+    [SerializeField] KeyCode rightKey;
+    [SerializeField] KeyCode jumpKey;
 
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float jumpForce = 7f;
@@ -31,24 +31,23 @@ public class Player : MonoBehaviour
         jumpCountCurr = jumpCountBase;
     }
 
-    // Fixed update for computing movement
-    void FixedUpdate()
+    void Update()
     {
-        Jump();
         Move();
+        Jump();
     }
 
-    // Move the player right or left based on the player input
+    // Move the player rightKey or leftKey based on the player input
     void Move() 
     {
-        if (Input.GetKey(left))
+        if (Input.GetKey(leftKey))
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             if (facingRight) {
                 Flip();
             }
         }
-        if (Input.GetKey(right)) 
+        if (Input.GetKey(rightKey)) 
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             if (!facingRight) {
@@ -57,10 +56,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Jump or doublejump according to the current number of jump available
+    // Jump or doublejump according to the current number of jumpKey available
     void Jump()
     {
-        if (Input.GetKeyDown(jump) && jumpCountCurr > 0)
+        if (Input.GetKeyDown(jumpKey) && jumpCountCurr > 1)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpCountCurr--;
